@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :department
       t.string :password_digest
       t.string :remember_digest
+      t.string :activation_digest
 
       t.boolean :admin, default: false
       t.boolean :teacher, default: false

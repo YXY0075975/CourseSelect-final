@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
 
   before_save :downcase_email
-  attr_accessor :remember_token
+  before_create :create_activation_digest
+  attr_accessor :remember_token, :activation_token
   validates :name, presence: true, length: {maximum: 50}
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
@@ -43,16 +44,32 @@ class User < ActiveRecord::Base
   end
 
   # Returns true if the given token matches the digest.
-  def user_authenticated?(attribute, token)
+  def authenticated?(attribute, token)
     digest = self.send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
   end
 
+  def avtivate
+    update_attribute(:avtivated,    true)
+    update_attribute(:avtivated_at, Time.zone.now)
+  end
+
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+  
+
   private
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def create_activation_digest
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
+    
   end
 
 end

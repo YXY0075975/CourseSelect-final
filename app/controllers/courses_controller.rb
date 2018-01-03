@@ -84,6 +84,20 @@ class CoursesController < ApplicationController
     redirect_to courses_path, flash: flash
   end
 
+  # ----------------------course_table------------------------------
+
+
+  def describe
+    @course = Course.find_by_id(params[:id])
+    render '/courses/description'   #@course.description 
+  end
+
+   def select
+      flag = nil
+      @courses = current_user.courses
+      @course = Course.find_by_id(params[:id])
+    end
+
 
   #-------------------------for both teachers and students----------------------
 

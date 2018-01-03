@@ -1,0 +1,6 @@
+ <%= @user.name %>,您好!
+
+请在浏览器的地址栏中输入如下地址来激活您的账户：
+<p><%= edit_account_activation_url(@user.activation_token, email: @user.email) %></p>
+
+<%=link_to "activate", edit_account_activation_url(@user.activation_token, email: @user.email) %>

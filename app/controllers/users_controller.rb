@@ -15,9 +15,19 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
+     
 
   def edit
     @user=User.find_by_id(params[:id])
+  end
+
+  # def index
+  #   @users = @user=User.find_by_id(params[:id])#User#.paginate(page: params[:page])#.where(avtivated: false)
+  # end 
+
+   def show
+    @user = User.find(params[:id])
+    redirect_to users_path
   end
 
   def update

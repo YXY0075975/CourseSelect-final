@@ -9,3 +9,5 @@ peng:
   name: 彭兆卿
   email: admin@test.com
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated: <% = Time.zone.now %>

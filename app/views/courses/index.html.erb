@@ -30,12 +30,13 @@
             <% @course.each do |course| %>
                 <tr>
 
-                  <td><%= course.course_code %></td>
-                  <td><%= course.name %></td>
-                  <td><%= course.credit %></td>
+                   <td><%= course.course_code %></td>
+                 <!--  <td><%= course.name %></td> -->
+                  <td><%= link_to course.name,describe_course_path(course)%></td>
+                  <td><%= course.credit %></td> 
                   <td><%= course.exam_type %></td>
-                  <td><%= course.teacher.name %></td>
-
+                  <td><%= course.teacher&.name %></td>
+                  <td><%= course.student_num%></td>
                   <% if teacher_logged_in? %>
                       <td><%= link_to "编辑", edit_course_url(course), class: 'btn btn-xs btn-info' %></td>
                       <% if course.open? %>
@@ -51,9 +52,9 @@
             <% end %>
             </tbody>
           </table>
-
         </div>
       </div>
     </div>
   </div>
 </div>
+

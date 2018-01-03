@@ -48,6 +48,8 @@ User.create(
     password: "password",
     password_confirmation: "password",
     admin: true
+    activated: true
+    activated: Time.zone.now
 )
 
 teacher_map={
@@ -132,6 +134,9 @@ teacher_map.keys.each do |index|
       password: "password",
       password_confirmation: "password",
       teacher: true
+      activated: true
+      activated: Time.zone.now
+)
   )
 
   teacher.teaching_courses.create!(
@@ -158,6 +163,9 @@ end
       department: StudentGenerator.department,
       password: "password",
       password_confirmation: "password",
+      activated: true
+      activated: Time.zone.now
+)
   )
 
   course_array=(1..34).to_a.sort { rand() - 0.5 }[1..rand(4..8)]
